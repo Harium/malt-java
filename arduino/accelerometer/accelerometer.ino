@@ -36,6 +36,7 @@ Distributed as-is; no warranty is given.
 //  class. We'll call it "accel". That's what we'll reference from
 //  here on out.
 MMA8452Q accel(MMA8452_ADDRESS);
+const float alpha = 0.5; //Smooth Factor
 
 // The setup function simply starts serial and initializes the
 //  accelerometer.
@@ -72,7 +73,7 @@ void loop()
     // First, use accel.read() to read the new variables:
     accel.read();  
     printCalculatedAccels();    
-    Serial.println(); // Print new line every time.
+    printAngles();
   }
 }
 
@@ -88,4 +89,22 @@ void printCalculatedAccels()
   Serial.print("\t");
   Serial.print(accel.cz, 3);
   Serial.print("\t");
+}
+
+void printAngles()
+{
+  double pitch, roll, fXg, fYg, fZg;
+ 
+  //Low Pass Filter
+  fXg = accel.cx * alpha + (fXg * (1.0 - alpha));
+  fYg = accel.cy * alpha + (fYg * (1.0 - alpha));
+  fZg = accel.cz * alpha + (fZg * (1.0 - alpha));
+ 
+  //Roll & Pitch Equations
+  roll  = (atan2(-fYg, fZg)*180.0)/M_PI;
+  pitch = (atan2(fXg, sqrt(fYg*fYg + fZg*fZg))*180.0)/M_PI;
+ 
+  Serial.print(pitch);
+  Serial.print("\t");
+  Serial.println(roll);
 }
