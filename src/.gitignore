@@ -1,2 +1,2 @@
-/ReadSerial.class
-/ReadSerial$1.class
+*.class
+/bin
