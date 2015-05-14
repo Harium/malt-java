@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project name="Malt" default="dist" basedir=".">
+
+	<property name="version"  value="0.2" />
+	<property name="libcore"  value="malt-${version}" />
+
+	<property name="src.dir"   value="src" />
+	<property name="build.dir" value="bin" />
+	<property name="lib.dir"   value="libs"/>
+
+	<path id="classpath">
+		<fileset dir="${lib.dir}" includes="**/*.jar" />
+	</path>
+	
+	<target name="dist" depends="clean, package"/>
+
+	<target name="clean">
+		<delete includeemptydirs="true" >
+			<fileset dir="${build.dir}">
+				<exclude name="**/assets/*"/>
+				<exclude name="**/assets/**"/>
+			</fileset>
+		</delete>
+	</target>
+
+	<target name="init">
+		<mkdir dir="${build.dir}" />
+	</target>
+   
+	<target name="compile">
+                <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false" source="1.6" target="1.6" debug="off">
+		  <classpath>
+		    <pathelement path="${classpath}" />
+		    <fileset dir="${lib.dir}">
+				<include name="RXTXcomm.jar"/>
+		    </fileset>
+		  </classpath>
+		</javac>
+		<copy todir="${build.dir}">
+		  <fileset dir="${src.dir}" excludes="**/*.java"/>
+		</copy>
+	</target>
+
+	<target name="package" depends="init, compile">
+		<jar destfile="${lib.dir}/${libcore}.jar">
+			<fileset dir="${build.dir}">
+				<include name="**/com/malt/*"/>
+				<include name="**/com/malt/**"/>
+			</fileset>
+		</jar>
+	</target>
+	
+</project>

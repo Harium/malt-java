@@ -1,4 +1,4 @@
-package com.maltboard.serial;
+package com.malt.serial;
 
 import gnu.io.CommPortIdentifier;
 import gnu.io.SerialPort;

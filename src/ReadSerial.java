@@ -1,8 +1,7 @@
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
-import com.maltboard.serial.SerialReader;
-
+import com.malt.serial.SerialReader;
 
 public class ReadSerial {
 	

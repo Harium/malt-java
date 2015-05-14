@@ -21,10 +21,19 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  digitalWrite(led, HIGH);   // turn the LED on (HIGH is the voltage level)
-  Serial.println("LED ON");  // send a message via serial interface
-  delay(1000);               // wait for a second
-  digitalWrite(led, LOW);    // turn the LED off by making the voltage LOW
-  Serial.println("LED OFF"); // send a message via serial interface
-  delay(1000);               // wait for a second
+  // read the state of the pushbutton value:
+  buttonState = digitalRead(buttonPin);
+
+  // check if the pushbutton is pressed.
+  // if it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {    
+    // turn LED on:    
+    digitalWrite(ledPin, HIGH);
+    Serial.println("LED ON");  // send a message via serial interface
+  }
+  else {
+    // turn LED off:
+    digitalWrite(ledPin, LOW);
+    Serial.println("LED OFF"); // send a message via serial interface
+  }
 }
