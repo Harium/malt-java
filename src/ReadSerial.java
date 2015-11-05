@@ -1,22 +1,29 @@
 import gnu.io.SerialPortEvent;
 import gnu.io.SerialPortEventListener;
 
-import com.malt.serial.SerialReader;
+import com.malt.serial.Serial;
 
 public class ReadSerial {
 	
 	public static void main(String[] args) throws Exception {
-		final SerialReader reader = new SerialReader();
-		reader.init(new SerialPortEventListener() {
+		initSerial();
+		
+		waitAlive();
+		System.out.println("Started");
+	}
+
+	public static Serial initSerial() {
+		final Serial serial = new Serial();
+		serial.init(new SerialPortEventListener() {
 			
 			/**
 			 * Handle an event on the serial port. Read the data and print it.
-			 */			
+			 */	
 			public synchronized void serialEvent(SerialPortEvent oEvent) {
 				if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
 					try {
-						String inputLine = reader.getInput().readLine();
-						System.out.println(inputLine);					
+						String inputLine = serial.receive();
+						System.out.println(inputLine);
 					} catch (Exception e) {
 						System.err.println(e.toString());
 					}
@@ -25,6 +32,10 @@ public class ReadSerial {
 			}
 		});
 		
+		return serial;
+	}
+
+	public static void waitAlive() {
 		Thread t = new Thread() {
 			public void run() {
 				//the following line will keep this app alive for 1000 seconds,
@@ -33,7 +44,6 @@ public class ReadSerial {
 			}
 		};
 		t.start();
-		System.out.println("Started");
 	}
 		
 }

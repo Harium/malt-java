@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project name="Malt" default="dist" basedir=".">
 
-	<property name="version"  value="0.2" />
+	<property name="version"  value="0.3" />
 	<property name="libcore"  value="malt-${version}" />
 
 	<property name="src.dir"   value="src" />

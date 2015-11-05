@@ -1,15 +1,19 @@
 package com.malt.serial;
 
 import gnu.io.CommPortIdentifier;
+import gnu.io.PortInUseException;
 import gnu.io.SerialPort;
 import gnu.io.SerialPortEventListener;
+import gnu.io.UnsupportedCommOperationException;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.util.Enumeration;
+import java.util.TooManyListenersException;
 
-public class SerialReader {
+public class Serial {
 	private static final String PORT_NAMES[] = { 
 		"/dev/tty.usbserial-A9007UX1", // Mac OS X
 		"/dev/ttyACM0", // Raspberry Pi
@@ -45,12 +49,30 @@ public class SerialReader {
 			return;
 		}
 
-		openPort(listener, portId);
+		try {
+			openPort(portId);
+		} catch (PortInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnsupportedCommOperationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		// add event listeners
+		try {
+			serialPort.addEventListener(listener);
+			serialPort.notifyOnDataAvailable(true);
+		} catch (TooManyListenersException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
-	private void openPort(SerialPortEventListener listener,
-			CommPortIdentifier portId) {
-		try {
+	private void openPort(CommPortIdentifier portId) throws PortInUseException, UnsupportedCommOperationException, IOException {
 			// open serial port, and use class name for the appName.
 			serialPort = (SerialPort) portId.open(this.getClass().getName(),
 					TIME_OUT);
@@ -64,13 +86,6 @@ public class SerialReader {
 			// open the streams
 			input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
 			output = serialPort.getOutputStream();
-
-			// add event listeners
-			serialPort.addEventListener(listener);
-			serialPort.notifyOnDataAvailable(true);
-		} catch (Exception e) {
-			System.err.println(e.toString());
-		}
 	}
 
 	private CommPortIdentifier findPort() {
@@ -95,6 +110,10 @@ public class SerialReader {
 		// gets us into the while loop and was suggested here was suggested http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
 		System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
 	}
+	
+	public void addListener(SerialPortEventListener listener) throws TooManyListenersException {
+		serialPort.addEventListener(listener);
+	}
 
 	/**
 	 * This should be called when you stop using the port.
@@ -113,6 +132,18 @@ public class SerialReader {
 
 	public OutputStream getOutput() {
 		return output;
+	}
+	
+	/**
+	 * Helper method to read line
+	 * @throws IOException 
+	 */
+	public String receive() throws IOException {
+		return input.readLine();
+	}
+	
+	public void send(String msg) throws IOException {
+		output.write(msg.getBytes());
 	}
 
 }
