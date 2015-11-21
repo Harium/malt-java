@@ -10,6 +10,7 @@ public class ReadAndWriteSerial {
 		
 		//Send a message
 		serial.send("Hello Microcontroller.");
-	}	
+		//serial.send("2 on;");
+	}
 		
 }
