@@ -1,3 +1,4 @@
+package examples;
 import com.malt.serial.Serial;
 
 public class ReadAndWriteSerial {

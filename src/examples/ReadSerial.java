@@ -1,7 +1,6 @@
-import gnu.io.SerialPortEvent;
-import gnu.io.SerialPortEventListener;
-
+package examples;
 import com.malt.serial.Serial;
+import com.malt.serial.SerialListener;
 
 public class ReadSerial {
 	
@@ -14,21 +13,16 @@ public class ReadSerial {
 
 	public static Serial initSerial() {
 		final Serial serial = new Serial();
-		serial.init(new SerialPortEventListener() {
+		serial.init(new SerialListener() {
 			
-			/**
-			 * Handle an event on the serial port. Read the data and print it.
-			 */	
-			public synchronized void serialEvent(SerialPortEvent oEvent) {
-				if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
-					try {
-						String inputLine = serial.receive();
-						System.out.println(inputLine);
-					} catch (Exception e) {
-						System.err.println(e.toString());
-					}
-				}
-				// Ignore all the other eventTypes, but you should consider the other ones.
+			@Override
+			public void receive(String text) {
+				System.out.println(text);
+			}
+			
+			@Override
+			public void error(Exception e) {
+				System.out.println(e.toString());
 			}
 		});
 		
