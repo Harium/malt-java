@@ -35,6 +35,9 @@ sudo chmod 775 /var/lock
 
 - Don't forget to logout!
 
+#### ARM Processors
+To use it in Rasberry Pi or BeagleBoard, follow the link: [http://angryelectron.com/rxtx-on-raspbian](http://angryelectron.com/rxtx-on-raspbian)
+
 #### References
 
 - [http://playground.arduino.cc/Interfacing/Java](http://playground.arduino.cc/Interfacing/Java)
