@@ -41,7 +41,7 @@ public class Serial implements SerialPortEventListener {
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 9600;
 
-	public void init(SerialListener listener) {
+	public void init(final SerialListener listener) {
 
 		new Thread(new Runnable() {
 			

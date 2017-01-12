@@ -12,22 +12,13 @@
 		<fileset dir="${lib.dir}" includes="**/*.jar" />
 	</path>
 	
-	<target name="dist" depends="clean, package"/>
-
-	<target name="clean">
-		<delete includeemptydirs="true" >
-			<fileset dir="${build.dir}">
-				<exclude name="**/assets/*"/>
-				<exclude name="**/assets/**"/>
-			</fileset>
-		</delete>
-	</target>
+	<target name="dist" depends="init, package"/>
 
 	<target name="init">
 		<mkdir dir="${build.dir}" />
 	</target>
    
-	<target name="compile">
+	<target name="compile" >
                 <javac srcdir="${src.dir}" destdir="${build.dir}" includeantruntime="false" source="1.6" target="1.6" debug="off">
 		  <classpath>
 		    <pathelement path="${classpath}" />
