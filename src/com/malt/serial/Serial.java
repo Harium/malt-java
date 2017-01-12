@@ -40,7 +40,19 @@ public class Serial implements SerialPortEventListener {
 	private static final int TIME_OUT = 2000;
 	/** Default bits per second for COM port. */
 	private static final int DATA_RATE = 9600;
-
+	
+	int baudRate = DATA_RATE;
+	
+	public Serial() {
+		super();
+	}
+	
+	public Serial(int baudRate) {
+		super();
+		
+		this.baudRate = baudRate;
+	}
+	
 	public void init(final SerialListener listener) {
 
 		new Thread(new Runnable() {
@@ -91,7 +103,7 @@ public class Serial implements SerialPortEventListener {
 				TIME_OUT);
 
 		// set port parameters
-		serialPort.setSerialPortParams(DATA_RATE,
+		serialPort.setSerialPortParams(baudRate,
 				SerialPort.DATABITS_8,
 				SerialPort.STOPBITS_1,
 				SerialPort.PARITY_NONE);
