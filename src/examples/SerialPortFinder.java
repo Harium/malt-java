@@ -1,11 +1,17 @@
 package examples;
 
+import gnu.io.CommPortIdentifier;
+
 import java.util.Enumeration;
 
-import gnu.io.CommPortIdentifier;
+import com.malt.helper.NativeLoader;
 
 public class SerialPortFinder {
 
+	static {
+		NativeLoader.loadLibrary();
+	}
+	
 	public static void main(String[] args) {
 
 		System.out.println("Searching ports...");
