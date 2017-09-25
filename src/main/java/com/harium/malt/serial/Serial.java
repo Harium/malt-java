@@ -1,4 +1,4 @@
-package com.malt.serial;
+package com.harium.malt.serial;
 
 import gnu.io.CommPortIdentifier;
 import gnu.io.PortInUseException;
@@ -56,8 +56,7 @@ public class Serial implements SerialPortEventListener {
 	public void init(final SerialListener listener) {
 
 		new Thread(new Runnable() {
-			
-			@Override
+
 			public void run() {
 				try {
 					initDebug(listener);

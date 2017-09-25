@@ -4,7 +4,7 @@
 	<property name="version"  value="0.4" />
 	<property name="libcore"  value="malt-${version}" />
 
-	<property name="src.dir"   value="src" />
+	<property name="src.dir"   value="src/main/java" />
 	<property name="build.dir" value="bin" />
 	<property name="lib.dir"   value="libs"/>
 

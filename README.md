@@ -7,6 +7,16 @@ In Eclipse IDE
 - Add the RXTXcomm.jar in libs folder
 - Point the native directory (of RXTXcomm.jar) to `~/git/{project}/libs/natives/{your_os}/{your_os_arch}/`
 
+In IntelliJ IDE
+- Add RXTXcomm.jar to dependencies
+- Put native files in libs/natives
+
+
+## Generating a local jar
+```
+mvn package -Dmaven.test.skip=true
+```
+
 #### Common issues
 
 ##### Avoid /var/lock permission issues

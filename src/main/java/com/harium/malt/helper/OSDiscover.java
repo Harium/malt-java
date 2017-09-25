@@ -1,4 +1,4 @@
-package com.malt.helper;
+package com.harium.malt.helper;
 
 public class OSDiscover {
 
