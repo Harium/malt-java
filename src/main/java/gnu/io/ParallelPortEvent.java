@@ -56,43 +56,42 @@
 |   All trademarks belong to their respective owners.
 --------------------------------------------------------------------------*/
 package gnu.io;
-import java.util.*;
+
+import java.util.EventObject;
 
 /**
-* @author Trent Jarvi
-* @version %I%, %G%
-* @since JDK1.0
-*/
+ * @author Trent Jarvi
+ * @version %I%, %G%
+ * @since JDK1.0
+ */
 
-public class ParallelPortEvent extends EventObject
-{
-	static public final int  PAR_EV_ERROR   =1;
-	static public final int  PAR_EV_BUFFER  =2;
+public class ParallelPortEvent extends EventObject {
+    static public final int PAR_EV_ERROR = 1;
+    static public final int PAR_EV_BUFFER = 2;
 
 
-	private boolean OldValue;
-	private boolean NewValue;
-	private int eventType;
-	/*public int eventType           =0; depricated */
+    private boolean OldValue;
+    private boolean NewValue;
+    private int eventType;
+    /*public int eventType           =0; depricated */
 
-	public ParallelPortEvent(ParallelPort srcport, int eventtype, 
-		boolean oldvalue, boolean newvalue)
-	{
-		super( srcport );	
-		OldValue=oldvalue;
-		NewValue=newvalue;
-		eventType=eventtype;
-	}
-	public int getEventType()
-	{
-		return(eventType);
-	}
-	public boolean getNewValue()
-	{
-		return( NewValue );
-	}
-	public boolean getOldValue()
-	{
-		return( OldValue );
-	}
+    public ParallelPortEvent(ParallelPort srcport, int eventtype,
+                             boolean oldvalue, boolean newvalue) {
+        super(srcport);
+        OldValue = oldvalue;
+        NewValue = newvalue;
+        eventType = eventtype;
+    }
+
+    public int getEventType() {
+        return (eventType);
+    }
+
+    public boolean getNewValue() {
+        return (NewValue);
+    }
+
+    public boolean getOldValue() {
+        return (OldValue);
+    }
 }

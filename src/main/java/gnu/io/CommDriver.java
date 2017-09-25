@@ -56,18 +56,17 @@
 |   All trademarks belong to their respective owners.
 --------------------------------------------------------------------------*/
 package gnu.io;
-import java.util.*;
 
 /**
-* @author Trent Jarvi
-* @version %I%, %G%
-* @since JDK1.0
-*/
+ * @author Trent Jarvi
+ * @version %I%, %G%
+ * @since JDK1.0
+ */
 
 
-public interface CommDriver
-{
-	public abstract CommPort getCommPort(String portName,int portType);
-	public abstract void initialize();
+public interface CommDriver {
+    CommPort getCommPort(String portName, int portType);
+
+    void initialize();
 }
 

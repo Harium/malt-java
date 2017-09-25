@@ -58,15 +58,15 @@
 |   All trademarks belong to their respective owners.
 --------------------------------------------------------------------------*/
 package gnu.io;
-import java.util.*;
+
+import java.util.EventListener;
 
 /**
-* @author Trent Jarvi
-* @version %I%, %G%
-* @since JDK1.0
-*/
+ * @author Trent Jarvi
+ * @version %I%, %G%
+ * @since JDK1.0
+ */
 
-public interface RawPortEventListener extends EventListener
-{
-	public abstract void RawEvent( RawPortEvent ev );
+public interface RawPortEventListener extends EventListener {
+    public abstract void RawEvent(RawPortEvent ev);
 }

@@ -57,15 +57,15 @@
 |   All trademarks belong to their respective owners.
 --------------------------------------------------------------------------*/
 package gnu.io;
-import java.util.*;
+
+import java.util.EventListener;
 
 /**
-* @author Trent Jarvi
-* @version %I%, %G%
-* @since JDK1.0
-*/
+ * @author Trent Jarvi
+ * @version %I%, %G%
+ * @since JDK1.0
+ */
 
-public interface RS485PortEventListener extends EventListener
-{
-	public abstract void RS485Event( RS485PortEvent ev );
+public interface RS485PortEventListener extends EventListener {
+    public abstract void RS485Event(RS485PortEvent ev);
 }

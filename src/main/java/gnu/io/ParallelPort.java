@@ -57,43 +57,54 @@
 --------------------------------------------------------------------------*/
 package gnu.io;
 
-import java.io.*;
-import java.util.*;
+import java.util.TooManyListenersException;
 
 
 /**
-* @author Trent Jarvi
-* @version %I%, %G%
-* @since JDK1.0
-*/
+ * @author Trent Jarvi
+ * @version %I%, %G%
+ * @since JDK1.0
+ */
 
-public  abstract class ParallelPort extends CommPort
-{
-	public static final int  LPT_MODE_ANY   =0;
-	public static final int  LPT_MODE_SPP   =1;
-	public static final int  LPT_MODE_PS2   =2;
-	public static final int  LPT_MODE_EPP   =3;
-	public static final int  LPT_MODE_ECP   =4;
-	public static final int  LPT_MODE_NIBBLE=5;
+public abstract class ParallelPort extends CommPort {
+    public static final int LPT_MODE_ANY = 0;
+    public static final int LPT_MODE_SPP = 1;
+    public static final int LPT_MODE_PS2 = 2;
+    public static final int LPT_MODE_EPP = 3;
+    public static final int LPT_MODE_ECP = 4;
+    public static final int LPT_MODE_NIBBLE = 5;
 
-	public abstract int getMode();
-	public abstract int setMode(int mode)
-		throws UnsupportedCommOperationException;
-	public abstract void restart();
-	public abstract void suspend();
-	public abstract boolean isPaperOut();
-	public abstract boolean isPrinterBusy();
-	public abstract boolean isPrinterError();
-	public abstract boolean isPrinterSelected();
-	public abstract boolean isPrinterTimedOut();
-	public abstract int getOutputBufferFree();
-	public abstract void addEventListener( ParallelPortEventListener lsnr )
-		throws TooManyListenersException;
-	public abstract void removeEventListener();
-	public abstract void notifyOnError( boolean enable );
-	public abstract void notifyOnBuffer( boolean enable );
+    public abstract int getMode();
+
+    public abstract int setMode(int mode)
+            throws UnsupportedCommOperationException;
+
+    public abstract void restart();
+
+    public abstract void suspend();
+
+    public abstract boolean isPaperOut();
+
+    public abstract boolean isPrinterBusy();
+
+    public abstract boolean isPrinterError();
+
+    public abstract boolean isPrinterSelected();
+
+    public abstract boolean isPrinterTimedOut();
+
+    public abstract int getOutputBufferFree();
+
+    public abstract void addEventListener(ParallelPortEventListener lsnr)
+            throws TooManyListenersException;
+
+    public abstract void removeEventListener();
+
+    public abstract void notifyOnError(boolean enable);
+
+    public abstract void notifyOnBuffer(boolean enable);
 /*
-	public int  PAR_EV_ERROR    1
+    public int  PAR_EV_ERROR    1
 	public int  PAR_EV_BUFFER   2
 	public ParallelPort(){}
 	private native static void Initialize();
