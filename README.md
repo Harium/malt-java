@@ -11,6 +11,14 @@ In IntelliJ IDE
 - Add RXTXcomm.jar to dependencies
 - Put native files in libs/natives
 
+## Maven
+```
+<dependency>
+    <groupId>com.harium.malt</groupId>
+    <artifactId>malt</artifactId>
+    <version>0.0.4</version>
+</dependency>
+```
 
 ## Generating a local jar
 ```
