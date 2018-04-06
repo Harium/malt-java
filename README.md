@@ -23,7 +23,7 @@ Native libraries should be downloaded from repository
 <dependency>
     <groupId>com.harium.malt</groupId>
     <artifactId>malt</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
 </dependency>
 ```
 

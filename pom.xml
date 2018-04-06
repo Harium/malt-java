@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.harium.malt</groupId>
     <artifactId>malt</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5</version>
     <packaging>jar</packaging>
     <name>Malt</name>
-    <description>A Java serial library</description>
+    <description>A Java serial library (A rxtx fork)</description>
     <url>http://github.com/harium/malt-java</url>
     <scm>
         <connection>scm:git:git://github.com/harium/malt-java.git</connection>
