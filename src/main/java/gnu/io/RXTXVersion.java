@@ -57,6 +57,8 @@
 --------------------------------------------------------------------------*/
 package gnu.io;
 
+import com.harium.util.loader.NativeLoader;
+
 /**
  * A class to keep the current version in
  */
@@ -74,7 +76,10 @@ public class RXTXVersion {
     private static String Version;
 
     static {
-        System.loadLibrary("rxtxSerial");
+        if (Config.LOAD_NATIVES) {
+            NativeLoader.load("rxtxSerial");
+        }
+
         Version = "RXTX-2.2pre2";
     }
 

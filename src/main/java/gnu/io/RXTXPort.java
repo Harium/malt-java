@@ -57,6 +57,8 @@
 --------------------------------------------------------------------------*/
 package gnu.io;
 
+import com.harium.util.loader.NativeLoader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -73,7 +75,7 @@ final public class RXTXPort extends SerialPort {
 	   tries to access private variables
 	*/
 
-    protected final static boolean debug = false;
+    protected final static boolean debug = Config.DEBUG;
     protected final static boolean debug_read = false;
     protected final static boolean debug_read_results = false;
     protected final static boolean debug_write = false;
@@ -88,9 +90,13 @@ final public class RXTXPort extends SerialPort {
         } catch (Exception e) {
         }
 
-        if (debug)
+        if (Config.DEBUG)
             z.reportln("RXTXPort {}");
-        System.loadLibrary("rxtxSerial");
+
+        if (Config.LOAD_NATIVES) {
+            NativeLoader.load("","rxtxSerial");
+        }
+
         Initialize();
     }
 

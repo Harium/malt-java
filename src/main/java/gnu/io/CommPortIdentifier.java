@@ -57,6 +57,10 @@
 --------------------------------------------------------------------------*/
 package gnu.io;
 
+import com.harium.util.loader.NativeLoader;
+import com.harium.util.loader.OSDiscover;
+import com.harium.util.loader.model.OS;
+
 import java.io.FileDescriptor;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -105,15 +109,14 @@ public class CommPortIdentifier extends Object /* extends Vector? */ {
             System.err.println(e + " thrown while loading " + "gnu.io.RXTXCommDriver");
         }
 
-        String OS;
-
-        OS = System.getProperty("os.name");
-        if (OS.toLowerCase().indexOf("linux") == -1) {
+        if (OSDiscover.getOS() == OS.LINUX) {
             if (Config.DEBUG)
                 System.out.println("Have not implemented native_psmisc_report_owner(PortName)); in CommPortIdentifier");
         }
 
-        System.loadLibrary("rxtxSerial");
+        if (Config.LOAD_NATIVES) {
+            NativeLoader.load("rxtxSerial");
+        }
     }
 
     CommPortIdentifier(String pn, CommPort cp, int pt, CommDriver driver) {

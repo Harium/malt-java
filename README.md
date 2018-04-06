@@ -1,5 +1,9 @@
-Java Serial
------------
+Malt
+----
+
+Malt is a fork of [rxtx](https://github.com/rxtx/rxtx), it can be used
+to send and receive messages between Java and Arduino.
+
 
 #### How to start
 
@@ -10,6 +14,9 @@ In Eclipse IDE
 In IntelliJ IDE
 - Add RXTXcomm.jar to dependencies
 - Put native files in libs/natives
+
+Native libraries should be downloaded from repository
+(Maven packages doesn't include native libraries).
 
 ## Maven
 ```
@@ -54,7 +61,7 @@ sudo chmod 775 /var/lock
 - Don't forget to logout!
 
 #### ARM Processors
-To use it in Rasberry Pi or BeagleBoard, follow the link: [http://angryelectron.com/rxtx-on-raspbian](http://angryelectron.com/rxtx-on-raspbian)
+To use with Rasberry Pi or BeagleBoard, follow the link: [http://angryelectron.com/rxtx-on-raspbian](http://angryelectron.com/rxtx-on-raspbian)
 
 #### References
 

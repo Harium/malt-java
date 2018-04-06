@@ -57,6 +57,8 @@
 --------------------------------------------------------------------------*/
 package gnu.io;
 
+import com.harium.util.loader.NativeLoader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -72,7 +74,9 @@ import java.util.TooManyListenersException;
 final class Raw extends RawPort {
 
     static {
-        System.loadLibrary("rxtxRaw");
+        if (Config.LOAD_NATIVES) {
+            NativeLoader.load("rxtxRaw");
+        }
         Initialize();
     }
 

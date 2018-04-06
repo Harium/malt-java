@@ -57,6 +57,8 @@
 --------------------------------------------------------------------------*/
 package gnu.io;
 
+import com.harium.util.loader.NativeLoader;
+
 import java.io.RandomAccessFile;
 
 public class Zystem {
@@ -79,7 +81,10 @@ public class Zystem {
 		Trent Jarvi taj@www.linux.org.uk
 		*/
 
-        //System.loadLibrary( "rxtxZystem" );
+        if (Config.LOAD_NATIVES) {
+            NativeLoader.load("rxtxZystem");
+        }
+
         mode = SILENT_MODE;
     }
 

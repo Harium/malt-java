@@ -57,6 +57,8 @@
 --------------------------------------------------------------------------*/
 package gnu.io;
 
+import com.harium.util.loader.NativeLoader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -69,7 +71,10 @@ import java.util.TooManyListenersException;
 final class LPRPort extends ParallelPort {
 
     static {
-        System.loadLibrary("rxtxParallel");
+        if (Config.LOAD_NATIVES) {
+            NativeLoader.load("rxtxParallel");
+        }
+
         Initialize();
     }
 

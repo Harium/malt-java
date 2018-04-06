@@ -57,6 +57,8 @@
 --------------------------------------------------------------------------*/
 package gnu.io;
 
+import com.harium.util.loader.NativeLoader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -72,7 +74,9 @@ import java.util.TooManyListenersException;
 final class RS485 extends RS485Port {
 
     static {
-        System.loadLibrary("rxtxRS485");
+        if (Config.LOAD_NATIVES) {
+            NativeLoader.load("rxtxRS485");
+        }
         Initialize();
     }
 

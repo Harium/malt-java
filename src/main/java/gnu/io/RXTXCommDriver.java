@@ -63,6 +63,8 @@
 
 package gnu.io;
 
+import com.harium.util.loader.NativeLoader;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Iterator;
@@ -80,7 +82,9 @@ public class RXTXCommDriver implements CommDriver {
 
     static {
         if (debug) System.out.println("RXTXCommDriver {}");
-        System.loadLibrary("rxtxSerial");
+        if (Config.LOAD_NATIVES) {
+            NativeLoader.load("rxtxSerial");
+        }
 
 		/*
            Perform a crude check to make sure people don't mix

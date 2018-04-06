@@ -57,6 +57,8 @@
 --------------------------------------------------------------------------*/
 package gnu.io;
 
+import com.harium.util.loader.NativeLoader;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -74,8 +76,12 @@ import java.util.TooManyListenersException;
  */
 final class I2C extends I2CPort {
 
+    static boolean loadNatives = true;
+
     static {
-        System.loadLibrary("rxtxI2C");
+        if (loadNatives) {
+            NativeLoader.load("rxtxI2C");
+        }
         Initialize();
     }
 
