@@ -10,6 +10,9 @@ import java.util.Enumeration;
 import java.util.TooManyListenersException;
 
 public class Serial implements SerialPortEventListener {
+
+    public static boolean DEBUG = false;
+
     private static final String PORT_NAMES[] = {
             "/dev/tty.usbserial-A9007UX1", // Mac OS X
             "/dev/ttyACM0", // Raspberry Pi
@@ -164,8 +167,14 @@ public class Serial implements SerialPortEventListener {
      *
      * @throws IOException
      */
-    public String receive() throws IOException {
-        return input.readLine();
+    public void receive() throws IOException {
+        String str;
+        while ((str = input.readLine()) != null) {
+            listener.receive(str);
+            if (DEBUG) {
+                System.out.println(str);
+            }
+        }
     }
 
     public void send(String msg) throws IOException {
@@ -178,9 +187,7 @@ public class Serial implements SerialPortEventListener {
     public synchronized void serialEvent(SerialPortEvent oEvent) {
         if (oEvent.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
             try {
-                String inputLine = receive();
-                listener.receive(inputLine);
-                System.out.println(inputLine);
+                receive();
             } catch (Exception e) {
                 listener.error(e);
                 System.err.println(e.toString());
