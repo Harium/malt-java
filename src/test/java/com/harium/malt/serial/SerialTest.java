@@ -46,36 +46,36 @@ public class SerialTest {
         portList.add(macPort);
         Enumeration ports = Collections.enumeration(portList);
 
-        CommPortIdentifier found = Serial.findPort(ports, new String[]{"/dev/tty.usbserial*"});
+        CommPortIdentifier found = Serial.findPort(ports, new String[]{"/dev/tty\\.usbserial-.+"});
         Assert.assertEquals(macPort, found);
     }
 
     @Test
     public void testRaspberryPiPortWithRegex() {
         // Raspberry Pi port
-        CommPortIdentifier macPort = mock(CommPortIdentifier.class);
-        when(macPort.getName()).thenReturn("/dev/ttyACM0");
+        CommPortIdentifier rpiPort = mock(CommPortIdentifier.class);
+        when(rpiPort.getName()).thenReturn("/dev/ttyACM0");
 
         List<CommPortIdentifier> portList = new ArrayList<>();
-        portList.add(macPort);
+        portList.add(rpiPort);
         Enumeration ports = Collections.enumeration(portList);
 
         CommPortIdentifier found = Serial.findPort(ports, new String[]{"/dev/ttyACM\\d+"});
-        Assert.assertEquals(macPort, found);
+        Assert.assertEquals(rpiPort, found);
     }
 
     @Test
     public void testLinusPiPortWithRegex() {
         // Linux port
-        CommPortIdentifier macPort = mock(CommPortIdentifier.class);
-        when(macPort.getName()).thenReturn("/dev/ttyUSB0");
+        CommPortIdentifier linuxPort = mock(CommPortIdentifier.class);
+        when(linuxPort.getName()).thenReturn("/dev/ttyUSB0");
 
         List<CommPortIdentifier> portList = new ArrayList<>();
-        portList.add(macPort);
+        portList.add(linuxPort);
         Enumeration ports = Collections.enumeration(portList);
 
         CommPortIdentifier found = Serial.findPort(ports, new String[]{"/dev/ttyUSB\\d+"});
-        Assert.assertEquals(macPort, found);
+        Assert.assertEquals(linuxPort, found);
     }
 
 }

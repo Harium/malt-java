@@ -14,7 +14,7 @@ public class Serial implements SerialPortEventListener {
     public static boolean DEBUG = false;
 
     private static final String PORT_NAMES[] = {
-            "/dev/tty.usbserial*", // Mac OS X
+            "/dev/tty\\.usbserial-.+", // Mac OS X
             "/dev/ttyACM\\d+", // Raspberry Pi
             "/dev/ttyUSB\\d+", // Linux
             "COM\\d+", // Windows
