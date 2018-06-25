@@ -52,6 +52,8 @@ public class Serial implements SerialPortEventListener {
     protected String port = "";
     protected int baudRate = DATA_RATE;
 
+    private boolean connected = false;
+
     public Serial() {
         super();
     }
@@ -104,25 +106,28 @@ public class Serial implements SerialPortEventListener {
 
         openPort(portId);
 
-        // add event listeners
+        // Add event listeners
         serialPort.addEventListener(this);
         serialPort.notifyOnDataAvailable(true);
     }
 
     private void openPort(CommPortIdentifier portId) throws PortInUseException, UnsupportedCommOperationException, IOException {
-        // open serial port, and use class name for the appName.
+        // Open serial port, and use class name for the appName.
         serialPort = (SerialPort) portId.open(this.getClass().getName(),
                 TIME_OUT);
 
-        // set port parameters
+        // Set port parameters
         serialPort.setSerialPortParams(baudRate,
                 SerialPort.DATABITS_8,
                 SerialPort.STOPBITS_1,
                 SerialPort.PARITY_NONE);
 
-        // open the streams
+        // Open the streams
         input = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
         output = serialPort.getOutputStream();
+
+        // Success
+        connected = true;
     }
 
     /* package */ CommPortIdentifier findPort() {
@@ -142,9 +147,10 @@ public class Serial implements SerialPortEventListener {
         return portId;
     }
 
-    /* package */ static CommPortIdentifier findPort(Enumeration<CommPortIdentifier> portEnum, String[] regexList) {
+    /* package */
+    static CommPortIdentifier findPort(Enumeration<CommPortIdentifier> portEnum, String[] regexList) {
         CommPortIdentifier portId = null;
-        //First, Find an instance of serial port as set in PORT_NAMES.
+        // First, find an instance of serial port as set in PORT_NAMES.
         while (portEnum.hasMoreElements()) {
             CommPortIdentifier currPortId = portEnum.nextElement();
             for (String regex : regexList) {
@@ -159,8 +165,9 @@ public class Serial implements SerialPortEventListener {
     }
 
     private void configureSerial() {
-        // the next line is for Raspberry Pi and
-        // gets us into the while loop and was suggested here was suggested http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
+        // The next line is for Raspberry Pi and
+        // Gets us into the while loop and was suggested here:
+        // http://www.raspberrypi.org/phpBB3/viewtopic.php?f=81&t=32186
         System.setProperty("gnu.io.rxtx.SerialPorts", "/dev/ttyACM0");
     }
 
@@ -195,6 +202,10 @@ public class Serial implements SerialPortEventListener {
     }
 
     public void send(String msg) throws IOException {
+        // Ignore send call if not connected
+        if (!connected) {
+            return;
+        }
         output.write(msg.getBytes());
     }
 
