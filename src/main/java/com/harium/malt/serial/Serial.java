@@ -237,4 +237,7 @@ public class Serial implements SerialPortEventListener {
         }
     }
 
+    public boolean isConnected() {
+        return connected;
+    }
 }
