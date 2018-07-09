@@ -1,81 +1,32 @@
 package com.harium.malt.serial;
 
-import gnu.io.CommPortIdentifier;
-import gnu.io.Config;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Enumeration;
-import java.util.List;
-
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 public class SerialTest {
 
+    private Serial serial;
+
     @Test
-    public void testInit() {
-        Serial serial = new Serial(9600);
-        Assert.assertEquals(9600, serial.baudRate);
+    public void testConstructorWithPort() {
+        String port = "MY_PORT";
+        serial = new Serial(port);
+        Assert.assertEquals(port, serial.port);
     }
 
     @Test
-    public void testFindWindowsPortWithRegex() {
-        // Windows port
-        CommPortIdentifier windowsPort = mock(CommPortIdentifier.class);
-        when(windowsPort.getName()).thenReturn("COM3");
-
-        List<CommPortIdentifier> portList = new ArrayList<>();
-        portList.add(windowsPort);
-        Enumeration ports = Collections.enumeration(portList);
-
-        CommPortIdentifier found = Serial.findPort(ports, new String[]{"COM\\d+"});
-        Assert.assertEquals(windowsPort, found);
+    public void testConstructorWithBaudRate() {
+        int baudRate = 9600;
+        serial = new Serial(baudRate);
+        Assert.assertEquals(baudRate, serial.baudRate);
     }
 
     @Test
-    public void testMacPortWithRegex() {
-        // MacOS port
-        CommPortIdentifier macPort = mock(CommPortIdentifier.class);
-        when(macPort.getName()).thenReturn("/dev/tty.usbserial-mydevice");
-
-        List<CommPortIdentifier> portList = new ArrayList<>();
-        portList.add(macPort);
-        Enumeration ports = Collections.enumeration(portList);
-
-        CommPortIdentifier found = Serial.findPort(ports, new String[]{"/dev/tty\\.usbserial-.+"});
-        Assert.assertEquals(macPort, found);
-    }
-
-    @Test
-    public void testRaspberryPiPortWithRegex() {
-        // Raspberry Pi port
-        CommPortIdentifier rpiPort = mock(CommPortIdentifier.class);
-        when(rpiPort.getName()).thenReturn("/dev/ttyACM0");
-
-        List<CommPortIdentifier> portList = new ArrayList<>();
-        portList.add(rpiPort);
-        Enumeration ports = Collections.enumeration(portList);
-
-        CommPortIdentifier found = Serial.findPort(ports, new String[]{"/dev/ttyACM\\d+"});
-        Assert.assertEquals(rpiPort, found);
-    }
-
-    @Test
-    public void testLinusPiPortWithRegex() {
-        // Linux port
-        CommPortIdentifier linuxPort = mock(CommPortIdentifier.class);
-        when(linuxPort.getName()).thenReturn("/dev/ttyUSB0");
-
-        List<CommPortIdentifier> portList = new ArrayList<>();
-        portList.add(linuxPort);
-        Enumeration ports = Collections.enumeration(portList);
-
-        CommPortIdentifier found = Serial.findPort(ports, new String[]{"/dev/ttyUSB\\d+"});
-        Assert.assertEquals(linuxPort, found);
+    public void testConstructorWithPortAndBaudRate() {
+        int baudRate = 9600;
+        String port = "MY_PORT";
+        serial = new Serial(port, baudRate);
+        Assert.assertEquals(baudRate, serial.baudRate);
     }
 
 }
