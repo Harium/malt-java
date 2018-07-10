@@ -1,29 +1,16 @@
 Malt
 ----
 
-Malt is a fork of [rxtx](https://github.com/rxtx/rxtx), it can be used
-to send and receive messages between Java and Arduino.
-
-
-#### How to start
-
-In Eclipse IDE
-- Add the RXTXcomm.jar in libs folder
-- Point the native directory (of RXTXcomm.jar) to `~/git/{project}/libs/natives/{your_os}/{your_os_arch}/`
-
-In IntelliJ IDE
-- Add RXTXcomm.jar to dependencies
-- Put native files in libs/natives
-
-Native libraries should be downloaded from repository
-(Maven packages doesn't include native libraries).
+Malt is a Java library that handles serial communication, it wraps
+[jSerialComm](https://github.com/Fazecast/jSerialComm).
+It can be used to send and receive messages between Java and Arduino (or other microcontrollers).
 
 ## Maven
 ```
 <dependency>
     <groupId>com.harium.malt</groupId>
     <artifactId>malt</artifactId>
-    <version>0.0.5</version>
+    <version>0.1.0</version>
 </dependency>
 ```
 
@@ -32,7 +19,11 @@ Native libraries should be downloaded from repository
 mvn package -Dmaven.test.skip=true
 ```
 
-#### Common issues
+## Examples
+
+See: [malt-examples](https://github.com/Harium/malt-examples)
+
+### Troubleshout
 
 ##### Avoid /var/lock permission issues
 
@@ -59,9 +50,6 @@ sudo chmod 775 /var/lock
 ```
 
 - Don't forget to logout!
-
-#### ARM Processors
-To use with Rasberry Pi or BeagleBoard, follow the link: [http://angryelectron.com/rxtx-on-raspbian](http://angryelectron.com/rxtx-on-raspbian)
 
 #### References
 

@@ -5,10 +5,10 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.harium.malt</groupId>
     <artifactId>malt</artifactId>
-    <version>0.0.6</version>
+    <version>0.1.0</version>
     <packaging>jar</packaging>
     <name>Malt</name>
-    <description>A Java serial library (A rxtx fork)</description>
+    <description>A jSerialComm wrapper</description>
     <url>http://github.com/harium/malt-java</url>
     <scm>
         <connection>scm:git:git://github.com/harium/malt-java.git</connection>
@@ -27,9 +27,9 @@
     </licenses>
     <dependencies>
         <dependency>
-            <groupId>com.harium</groupId>
-            <artifactId>native-loader</artifactId>
-            <version>1.0.2</version>
+            <groupId>com.fazecast</groupId>
+            <artifactId>jSerialComm</artifactId>
+            <version>[2.0.0,3.0.0)</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
